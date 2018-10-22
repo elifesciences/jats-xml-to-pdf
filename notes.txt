@@ -1,0 +1,135 @@
+type: link
+name: XSL:FO
+location: https://en.wikipedia.org/wiki/XSL_Formatting_Objects
+description: |
+    XSL Formatting Objects is a markup language for XML document formatting that is most often used to generate PDF files. XSL-FO is part of XSL (Extensible Stylesheet Language), a set of W3C technologies designed for the transformation and formatting of XML data. The other parts of XSL are XSLT and XPath. Version 1.1 of XSL-FO was published in 2006. 
+    
+    XSL-FO is considered feature complete by W3C
+notes:
+    - no single processor (FOP, Antenna House, etc) 100% supports XSL:FO
+---
+type: link
+name: XFA
+location: https://en.wikipedia.org/wiki/XFA
+description: XFA (also known as XFA forms) stands for XML Forms Architecture, a family of proprietary XML specifications that was suggested and developed by JetForm to enhance the processing of web forms. It can be also used in PDF files starting with PDF 1.5 specification. XFA specification is referenced as an external specification indispensable for the application of ISO 32000-1 specification (PDF 1.7). XML Forms Architecture was not standardized as an ISO standard.
+notes:
+    - avoid
+    - not standard
+    - not 'open'
+    - "most pdf processors do not handle XFA content"
+---
+type: link
+name: Apache FOP
+location: https://en.wikipedia.org/wiki/Apache_FOP_(Formatting_Objects_Processor)
+description: Formatting Objects Processor (FOP, also known as Apache FOP) is a Java application that converts XSL Formatting Objects (XSL-FO) files to PDF or other printable formats. FOP is open source software, and is distributed under the Apache License 2.0.
+notes:
+    - "Most important elements added in XSL-FO 1.1 (flow maps, table markers, indexes. etc.) are not available"
+    - "older XSL-FO 1.0 features are still not fully supported including automatic table layout, floats and more."
+    - multiple output formats with PDF being the best, but also ASCII, postscript, image formats, Java2D
+---
+type:elife-xml-to-pdf-proposal
+name: JATS2LaTeX -> pdflatex -> PDF
+conversion-type: JATS -> LaTeX -> PDF
+homepage: https://github.com/Vitaliy-1/JATS2LaTeX
+references:
+    - https://forum.pkp.sfu.ca/t/jats-xml-to-pdf-converter/30554
+licence: GPL3
+languages:
+    - java
+    - tex
+    - latex
+    - texlive (pdflatex)
+examples:
+    - https://github.com/Vitaliy-1/JATS2LaTeX/tree/master/example
+notes: 
+---
+type: elife-xml-to-pdf-proposal
+name: CaSSius
+conversion-type: XML -> HTML+CSS+JS -> PDF
+location: https://github.com/MartinPaulEve/CaSSius
+description: a tool to create beautiful paginated PDF documents from HTML content using CSS regions
+references:
+    - https://www.martineve.com/2016/06/19/cassius-now-supports-full-headless-pdf-creation-from-jats/
+licence: AGPL3
+languages:
+    - xslt
+    - python
+    - html/css
+    - javascript
+examples:
+    - https://www.martineve.com/cassius/sample.pdf
+notes:
+    - feels like a kludge of web technologies
+    - requires a headless browser if I'm reading the explanation right
+    - author sounds 'technical enough to be dangerous'
+    - the XML -> HTML+etal step is a mix of Python and xsl
+    - no tests
+    - output is ok, but not *that* great. I mean, the author really talks up how pretty the results are
+---
+type:elife-xml-to-pdf-proposal
+name: pandoc-jats
+location: https://github.com/mfenner/pandoc-jats
+description: A Lua custom writer for Pandoc generating JATS XML
+---
+type:elife-xml-to-pdf-proposal
+name: Preview XSLT stylesheets
+location: https://github.com/ncbi/JATSPreviewStylesheets
+description: These stylesheets provide preview display of journal articles tagged using NISO JATS version 1.0 
+---
+type:elife-xml-to-pdf-proposal
+name: Paged Media
+location: https://print-css.rocks/intro.html
+description: CSS Paged Media (a W3C standard) is a way to generate PDF documents from XML/HTML as input and CSS for styling.
+references:
+    - https://www.zopyx.com/news/print-css-rocks-pdf-converter-comparison
+examples:
+    - https://print-css.rocks/references.html
+notes:
+    - website is a front for a for-profit proprietary-orientated organisation "zopyx"
+    - all examples are using proprietary and expensive technology
+    - quite immature right now
+    - doubtful of consistency of rendering going forwards
+---
+type:document, parser:markdown
+# Automated JATS XML to PDF conversion
+
+## introduction
+
+JATS is a specification for describing articles. The specification is clear on how articles must be described however it's possible for the same article to be described in different ways by different authors and still fulfill the requirements of the specification. Authors themselves may also vary how they describe documents over time. This introduces the problem of how to treat JATS documents uniformly across authors and time so that all instances of JATS articles may benefit from common tools. 
+
+Converting JATS XML to PDF is perhaps *the* most commonly encountered problem. eLife, like many publishers, has the final PDF version of an article hand-crafted.
+
+This is necessary because:
+
+* automated conversions never *quite* approach the precision of print design
+* most articles are not read on the publisher's site in HTML form but in PDF form on some index/aggregator. The quality of this PDF is often the first impression the author's intended audience receives.
+* authors often feel the version of their submitted article to be the best formatted version and any clumsiness introduced with an automated approach to be an affront to them personally and a black mark against the reputation of the publisher.
+* the tools for the creation of hand-crafted PDF files has become relatively quick and convenient to use
+* it's cheap to outsource this labour
+* [...]
+
+Attached to this report are different tools and technologies that help to achieve this goal of automated JATS to PDF conversion. Each approach has it's trade-offs and each is complex, requiring knowledge of multiple technologies.
+
+This report is an evaulation of these technologies with a view to adoption during the article production process at eLife to:
+
+* remove vendor dependency
+* remove ability for authors to request changes to PDF
+* share our work with other publishers
+
+## approach
+
+Two perspectives can be taken at the outset:
+
+1. a member of the production team involved in producing a final article
+2. a developer tasked with converting JATS to PDF
+
+A production staff member cares about the articles being processed *right now* and less about those previously published. Should the conversion process be unsatisfactory then the production process for that article stalls and either the conversion program is fixed by a developer or the PDF is generated by hand.  These faults during production should be obvious, rare and able to be fixed quickly.
+
+A developer looks at the thousands of articles published in XML and their hand-crafted PDF counterparts and wonders just how close to the 'ideal' PDF they can get. It is extremely improbable a PDF of perfect fidelty can be generated, but with the correct measurements the accuracy to the original can be known. This will be valuable when testing convertors. The very best converters will have high fidelty on individual articles but also uniformly across a large representative proportion of the article corpus.
+
+
+
+
+
+
+
