@@ -1,0 +1,14 @@
+git clone https://github.com/MartinPaulEve/CaSSius
+
+# we need to pass our xml through the importer first
+
+cd cassius-import
+
+python cassius-import/bin/cassius-import.py ../../dtd/elife-09560-v1.xml outfile.html
+firefox outfile.html
+
+# [wait for rendering]
+# ctrl-p
+# print to file
+# [wait for collating]
+

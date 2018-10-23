@@ -27,10 +27,10 @@ notes:
     - "older XSL-FO 1.0 features are still not fully supported including automatic table layout, floats and more."
     - multiple output formats with PDF being the best, but also ASCII, postscript, image formats, Java2D
 ---
-type:elife-xml-to-pdf-proposal
+type:elife-xml-to-pdf-candidate
 name: JATS2LaTeX -> pdflatex -> PDF
 conversion-type: JATS -> LaTeX -> PDF
-homepage: https://github.com/Vitaliy-1/JATS2LaTeX
+location: https://github.com/Vitaliy-1/JATS2LaTeX
 references:
     - https://forum.pkp.sfu.ca/t/jats-xml-to-pdf-converter/30554
 licence: GPL3
@@ -41,9 +41,17 @@ languages:
     - texlive (pdflatex)
 examples:
     - https://github.com/Vitaliy-1/JATS2LaTeX/tree/master/example
-notes: 
+evaluation:
+    - an example of a sprawling barely-structured codebase relying on a specific idiomatic usage of JATS
+    - does not work 09560 v1 xml, a null pointer exception traced to extraction of metadata
+    - immature code, immature codebase
+    - verbose code
+    - lots of repetition
+    - no architecture to allow extending or customising
+decision:
+    - avoid
 ---
-type: elife-xml-to-pdf-proposal
+type: elife-xml-to-pdf-candidate
 name: CaSSius
 conversion-type: XML -> HTML+CSS+JS -> PDF
 location: https://github.com/MartinPaulEve/CaSSius
@@ -60,23 +68,47 @@ examples:
     - https://www.martineve.com/cassius/sample.pdf
 notes:
     - feels like a kludge of web technologies
-    - requires a headless browser if I'm reading the explanation right
-    - author sounds 'technical enough to be dangerous'
     - the XML -> HTML+etal step is a mix of Python and xsl
     - no tests
-    - output is ok, but not *that* great. I mean, the author really talks up how pretty the results are
+    - output examples are ok, but not *that* great. I mean, the author really talks up how pretty the results are
+evaluation:
+    - generating the special HTML required for cassius was straight forward. 
+    - the python script could easily be replaced with a bash script
+    - the browser rendering (firefox 62.0.3) displayed incorrectly with all pages on the first page and 49 blank pages
+    - browser rendering was quite slow
+    - browser printing was very slow
+    - I imagine headless printing will be just as slow
+    - pdf was similar
+decision:
+    - revisit
 ---
-type:elife-xml-to-pdf-proposal
-name: pandoc-jats
-location: https://github.com/mfenner/pandoc-jats
-description: A Lua custom writer for Pandoc generating JATS XML
+type:elife-xml-to-pdf-candidate
+name: Pandoc
+location: http://pandoc.org/MANUAL.html
+description: Pandoc is a Haskell library for converting from one markup format to another
+references:
+    - http://pandoc.org/MANUAL.html#input-formats
+notes:
+    - pandoc appears to natively support JATS as an input
+    - support is still *alpha* quality
+    - Ubuntu 18.10 has a recent enough version to use (see Dockerfile)
+evaluation:
+    - installation and configuration was a hassle. I did it within a docker container
+    - pdf output is impressive in terms of completeness
+        - bookmarks, footnotes present
+        - no images yet but I was only targeting the xml
+        - tables are absent
+        - margins are crazy
+decision:
+    - promising
 ---
-type:elife-xml-to-pdf-proposal
+type:elife-xml-to-pdf-candidate
 name: Preview XSLT stylesheets
 location: https://github.com/ncbi/JATSPreviewStylesheets
 description: These stylesheets provide preview display of journal articles tagged using NISO JATS version 1.0 
+
 ---
-type:elife-xml-to-pdf-proposal
+type:elife-xml-to-pdf-candidate
 name: Paged Media
 location: https://print-css.rocks/intro.html
 description: CSS Paged Media (a W3C standard) is a way to generate PDF documents from XML/HTML as input and CSS for styling.
@@ -87,8 +119,13 @@ examples:
 notes:
     - website is a front for a for-profit proprietary-orientated organisation "zopyx"
     - all examples are using proprietary and expensive technology
-    - quite immature right now
+    - paged media is still quite immature right now
+    - no wikipedia page?
     - doubtful of consistency of rendering going forwards
+---
+type:elife-xml-to-pdf-candidate
+name: elife article-json to pdf 
+description: uses elife's article-json generator to create a JSON structure and then [some custom tool] to generate a PDF
 ---
 type:document, parser:markdown
 # Automated JATS XML to PDF conversion
@@ -127,9 +164,18 @@ A production staff member cares about the articles being processed *right now* a
 
 A developer looks at the thousands of articles published in XML and their hand-crafted PDF counterparts and wonders just how close to the 'ideal' PDF they can get. It is extremely improbable a PDF of perfect fidelty can be generated, but with the correct measurements the accuracy to the original can be known. This will be valuable when testing convertors. The very best converters will have high fidelty on individual articles but also uniformly across a large representative proportion of the article corpus.
 
+## concerns
 
+* convenience of styling
+* changes in underlying technologies that affect rendered results
+* speed
 
+## method
 
-
+1. can I do a basic "xml in, something out". 
+    - if not, investigate code
+        - is code redeemable?
+            - if not, discard
+2. 
 
 
