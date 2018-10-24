@@ -10,4 +10,8 @@ RUN unzip saxon-he.zip && rm saxon-he.zip
 WORKDIR /root
 RUN wget https://github.com/ncbi/JATSPreviewStylesheets/archive/master.zip
 RUN unzip master
+
+RUN wget https://www-eu.apache.org/dist//xmlgraphics/fop/binaries/fop-2.3-bin.tar.gz
+RUN tar xvzf fop-2.3-bin.tar.gz
+
 COPY transform.sh ./

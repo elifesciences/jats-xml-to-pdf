@@ -106,7 +106,10 @@ type:elife-xml-to-pdf-candidate
 name: Preview XSLT stylesheets
 location: https://github.com/ncbi/JATSPreviewStylesheets
 description: These stylesheets provide preview display of journal articles tagged using NISO JATS version 1.0 
-
+notes:
+    - only Saxon HE (Home Edition) is Open Source
+    - the guide on this site is recommending stylesheets that require paid-for versions of Saxon (PE and higher)
+    - 
 ---
 type:elife-xml-to-pdf-candidate
 name: Paged Media
