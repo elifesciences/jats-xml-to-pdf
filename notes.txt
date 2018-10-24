@@ -103,13 +103,29 @@ decision:
     - promising
 ---
 type:elife-xml-to-pdf-candidate
-name: Preview XSLT stylesheets
+name: NCBI NLM Preview XSLT stylesheets
 location: https://github.com/ncbi/JATSPreviewStylesheets
 description: These stylesheets provide preview display of journal articles tagged using NISO JATS version 1.0 
+references:
+    - https://www.ncbi.nlm.nih.gov/books/NBK189779/
 notes:
     - only Saxon HE (Home Edition) is Open Source
     - the guide on this site is recommending stylesheets that require paid-for versions of Saxon (PE and higher)
-    - 
+    - Apache FOP can't handle the transformation of xml to fo using xsl
+    - using Saxon to generate the .fo file and FOP to generate the pdf, you *almost* get there.
+    - adding euclid for the mathml helps
+    - still left with two java stacktraces that offer zero insight into what the problem is
+    - cutting out sections of the fo file and re-running the transformation isn't a great way to debug
+    - no success, see notes.txt
+---
+type:elife-xml-to-pdf-candidate
+name: JATSKit Preview XSLT stylesheets
+location: https://github.com/wendellpiez/JATSKit
+description: This oXygen framework supports editing JATS articles (v1.1) ... Included are DTDs, CSS files for authoring, document templates, XSLT stylesheets and other utilities for editing of JATS XML and production of HTML, PDF (preview) and EPUB outputs.
+notes:
+    - discovered while debugging problems in the NCBI NLM fo outputs
+    - different stylesheets will generate different fo files which may have fewer issues being transformed into PDF files
+
 ---
 type:elife-xml-to-pdf-candidate
 name: Paged Media
