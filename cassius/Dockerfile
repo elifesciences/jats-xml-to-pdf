@@ -1,6 +1,8 @@
 FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update
+# doesn't work, wkhtmltopdf requires a *patched* version of qt that isn't the repos
+#RUN apt-get install less xvfb wkhtmltopdf python openjdk-11-jre-headless unzip wget -y --no-install-recommends
 RUN apt-get install less xfonts-75dpi fontconfig xfonts-base python openjdk-11-jre-headless unzip wget -y --no-install-recommends
 
 WORKDIR /root
