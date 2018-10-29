@@ -20,6 +20,5 @@ RUN cp ./jeuclid-3.1.9/repo/jeuclid-core-3.1.9.jar ./jeuclid-3.1.9/repo/jeuclid-
 
 RUN wget --quiet ftp://ftp.ncbi.nlm.nih.gov/pub/jats/archiving/1.0/jats-archiving-dtd-1.0.zip
 RUN unzip -d dtd jats-archiving-dtd-1.0.zip
-RUN chown 1000:1000 -R ./dtd/
 
 COPY transform.sh ./
