@@ -1,3 +1,3 @@
 #!/bin/bash
-set -eux
+set -eu
 sudo docker run -it --rm --volume $(pwd)/mnt:/mnt lsh/pandoc /bin/bash

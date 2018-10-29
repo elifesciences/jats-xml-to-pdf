@@ -15,7 +15,7 @@ sudo docker run \
     -it \
     --rm \
     --volume $(pwd)/mnt:/mnt \
-    lsh/pandoc \
+    lsh/CONTAINER_NAME \
     ./transform.sh "$infile_fname" "$outfile_fname"
 
 test -e "./mnt/$outfile_fname"

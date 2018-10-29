@@ -1,4 +1,3 @@
 #!/bin/bash
-set -e
-mkdir -p mnt/
-sudo docker build -t lsh/jats-xslt .
+set -eux
+sudo docker build -t lsh/jats-xslt-stylesheets . "$@"

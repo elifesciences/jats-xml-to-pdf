@@ -27,6 +27,15 @@ notes:
     - "older XSL-FO 1.0 features are still not fully supported including automatic table layout, floats and more."
     - multiple output formats with PDF being the best, but also ASCII, postscript, image formats, Java2D
 ---
+type: link
+name: TCPDF
+location: https://github.com/tecnickcom/tcpdf
+description: PHP library for generating PDF documents on-the-fly.
+notes:
+    - "A new version of this library is under development at https://github.com/tecnickcom/tc-lib-pdf and as a consequence this version will not receive any additional development or support. This version should be considered obsolete ..."
+    - new version isn't complete or stable
+    - I still see development happening
+---
 type:elife-xml-to-pdf-candidate
 name: JATS2LaTeX -> pdflatex -> PDF
 conversion-type: JATS -> LaTeX -> PDF

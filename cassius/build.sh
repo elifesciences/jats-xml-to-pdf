@@ -1,4 +1,3 @@
 #!/bin/bash
-set -e
-mkdir -p mnt/
+set -eux
 sudo docker build -t lsh/cassius . "$@"

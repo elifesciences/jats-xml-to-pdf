@@ -1,3 +1,6 @@
 dtd/
 mnt/
+pdf/
+log/
 articles/
+*.flag
