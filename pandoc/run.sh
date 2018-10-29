@@ -5,9 +5,14 @@ infile_fname=$(basename $infile)
 outfile="$2"
 outfile_fname=$(basename $outfile)
 
-if [ ! -d ./mnt ]; then
-    # probably a once-off
-    mkdir -p ./mnt/
+rm -rf ./mnt
+if [ -d $infile ]; then
+    # a dir has been specified, copy it's contents to /mnt
+    cp -R "$infile" ./mnt/
+    infile_fname="elife-$infile_fname-v1.xml"
+fi
+
+if [ -f "$infile" ]; then
     cp "$infile" "./mnt/$infile_fname"
 fi
 
