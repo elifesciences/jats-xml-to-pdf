@@ -39,7 +39,7 @@ for zipfile in ./articles/*.tar.gz; do
         fi
 
         # remove previous results
-        rm -rf "./$tname/mnt"
+        sudo rm -rf "./$tname/mnt" # TODO: 'sudo' usage is a smell
         mkdir "./$tname/mnt"
 
         # unpack article
