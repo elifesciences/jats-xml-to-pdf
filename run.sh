@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eu
 
 transformers=( cassius jats-xslt-stylesheets pandoc )
 
@@ -10,6 +10,7 @@ mkdir -p "./log"
 
 if [ ! -f "built.flag" ]; then
     for tname in "${transformers[@]}"; do
+        sudo rm -rf "./$tname/mnt/"
         sed "s/lsh\/CONTAINER_NAME/lsh\/$tname/" template-shell.sh > "./$tname/shell.sh"
         sed "s/lsh\/CONTAINER_NAME/lsh\/$tname/" template-build.sh > "./$tname/build.sh"
         sed "s/lsh\/CONTAINER_NAME/lsh\/$tname/" template-runner.sh > "./$tname/run.sh"
@@ -19,6 +20,7 @@ if [ ! -f "built.flag" ]; then
         )
     done
     touch "built.flag"
+    exit 0
 fi
 
 for zipfile in ./articles/*.tar.gz; do
