@@ -21,7 +21,7 @@ if [ ! -f "built.flag" ]; then
     touch "built.flag"
 fi
 
-for zipfile in ./articles/*; do
+for zipfile in ./articles/*.tar.gz; do
     fname=$(basename $zipfile) # 09560.tar.gz
     msid="${fname%%.*}" # 09560
     echo "article $msid"
@@ -60,6 +60,7 @@ for zipfile in ./articles/*; do
             fi
 
             mv "./mnt/$pdf" "../pdf/"
+            echo "done"
         )
     done
 done
