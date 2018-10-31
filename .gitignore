@@ -3,4 +3,5 @@ mnt/
 log/
 *.flag
 articles/*/
-articles/*.tar.gz
+articles/*.gz
+articles/*.zip
