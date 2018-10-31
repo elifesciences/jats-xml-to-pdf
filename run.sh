@@ -49,10 +49,15 @@ for zipfile in ./articles/*.tar.gz; do
         (
             cd "./$tname"
             
-            xml="./elife-$msid-v1.xml"
+            xml="elife-$msid-v1.xml"
             echo > "../log/$log" # empty log
-            ./run.sh "./mnt/$xml" $pdf >> "../log/$log" 2>&1 || {
-                echo "failed $?"
+            ./run.sh "./mnt/$xml" $pdf &> "../log/$log" || {
+                printf "failed '$?'"
+                if [ -f "./mnt/$pdf" ]; then
+                    printf " pdf generated"
+                    mv "./mnt/$pdf" "../pdf/"
+                fi
+                echo
                 continue
             }
 
