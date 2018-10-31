@@ -1,5 +1,6 @@
 dtd/
 mnt/
 log/
-articles/
 *.flag
+articles/*/
+articles/*.tar.gz
