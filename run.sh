@@ -2,7 +2,7 @@
 
 set -eu
 
-transformers=( cassius jats-xslt-stylesheets pandoc )
+transformers=( cassius jats-xslt-stylesheets pandoc jats2latex )
 
 # init everything, build the containers, reset any changes to the ad-hoc scripts, etc
 mkdir -p "./pdf"
