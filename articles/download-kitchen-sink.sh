@@ -23,6 +23,6 @@ mv XML-mapping-master 00666
 )
 
 printf "zipping... "
-tar -czf "$zipfile" "./00666/"
+tar -czf "$zipfile" "00666/"
 
 echo "done"
