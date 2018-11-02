@@ -2,7 +2,7 @@
 
 set -eu
 
-transformers=( cassius jats-xslt-stylesheets pandoc jats2latex )
+transformers=( cassius jats-xslt-stylesheets pandoc jats2latex peerj-jats-conversion )
 
 # https://stackoverflow.com/questions/1862510/how-can-the-last-commands-wall-time-be-put-in-the-bash-prompt
 function timer_now {
