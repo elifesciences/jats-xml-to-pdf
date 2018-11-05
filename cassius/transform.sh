@@ -10,10 +10,7 @@ cp "/mnt/$input" "/root/dtd/$input"
 python ./CaSSius/cassius-import/bin/cassius-import.py "/root/dtd/$input" "/mnt/$output_name.html"
 
 # paths in the html reference the cassius dir
-(
-cd /mnt/
-ln -sf /root/CaSSius/cassius
-)
+cp -R /root/CaSSius/cassius /mnt/
 
 # convert HTML->PDF
 wkhtmltopdf \
