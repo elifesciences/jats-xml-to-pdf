@@ -8,7 +8,7 @@ outfile_fname=$(basename $outfile)
 if [ -d $infile ]; then
     # a dir has been specified, copy it's contents to /mnt
     # the root run.sh populates the ./mnt dir directly
-    rm -rf ./mnt
+    sudo rm -rf ./mnt
     cp -R "$infile" ./mnt/
     infile_fname="elife-$infile_fname-v1.xml"
 fi
