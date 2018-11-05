@@ -80,16 +80,19 @@ notes:
     - the XML -> HTML+etal step is a mix of Python and xsl
     - no tests
     - output examples are ok, but not *that* great. I mean, the author really talks up how pretty the results are
+    - from the javascript, it looks like the pages are being added after the polyfill. 
+    - loading just the html (for inspecting) causes firefox to slow down and timeout constantly. I have no idea what is causing it
 evaluation:
-    - generating the special HTML required for cassius was straight forward. 
-    - the python script could easily be replaced with a bash script
+    - generating the special HTML required for cassius was straight forward
     - the browser rendering (firefox 62.0.3) displayed incorrectly with all pages on the first page and 49 blank pages
     - browser rendering was quite slow
     - browser printing was very slow
-    - I imagine headless printing will be just as slow
-    - pdf was similar
+    - headless printing with wkhtmlpdf is not so bad
+    - javascript is broken and the distinction between print/screen is ambiguous when using firefox/chrome to debug, which is infuriating
 decision:
-    - revisit
+    - skip cassius unless we do it from scratch and understand what is happening at each step, including the xslt
+    - out of the box it doesn't work for elife xml
+    - with some hours of debugging and tweaking it still doesn't work
 ---
 type:elife-xml-to-pdf-candidate
 name: Pandoc
@@ -158,6 +161,17 @@ description: uses elife's article-json generator to create a JSON structure and 
 type:elife-xml-to-pdf-candidate
 name: peerj jats-converstion to html, html to pdf
 description: This repository contains: XSL files for conversion from JATS XML to various other formats.
+notes:
+    - simpler example of converting from jats to html and then html to pdf than cassius
+---
+type: tool
+name: weasyprint
+description: python html->pdf tool
+notes:
+    - couldn't install a headless version (i.e. it pulled in all of xorg with libpango1.0)
+    - generated PDF out of the box isn't any better or worse than wkhtmlpdf
+    - wkhtmlpdf doesn't come with a boatload of dependencies however
+    - there are some opinions that it is less robust than wkhtmlpdf and fails randomly
 ---
 type:document,filename:README.md
 content-type:markdown
