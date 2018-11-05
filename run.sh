@@ -48,7 +48,6 @@ function update_metrics {
 # init everything, build the containers, reset any changes to the ad-hoc scripts, etc
 mkdir -p "./pdf"
 mkdir -p "./log"
-echo "msid,transformer,time,success" > timing.csv
 
 if [ ! -f "built.flag" ]; then
     for tname in "${transformers[@]}"; do
@@ -64,6 +63,9 @@ if [ ! -f "built.flag" ]; then
     touch "built.flag"
     exit 0
 fi
+
+
+echo "msid,transformer,time,success" > timing.csv
 
 for zipfile in ./articles/*.tar.gz; do
     fname=$(basename $zipfile) # 09560.tar.gz
