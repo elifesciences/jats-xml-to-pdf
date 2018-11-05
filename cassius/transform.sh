@@ -14,6 +14,7 @@ cp -R /root/CaSSius/cassius /mnt/
 
 # convert HTML->PDF
 wkhtmltopdf \
+    --print-media-type \
     --javascript-delay 15000  \
     --enable-external-links \
     --no-stop-slow-scripts \
