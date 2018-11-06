@@ -9,21 +9,12 @@ output_name="${output%.*}" # "out"
 
 # this is the intermediate tex file before becoming PDF
 # the -s or --standalone flag is necessary else it strips header and title information?
-pandoc -f jats "/mnt/$input" -s -o "/mnt/$output_name-intermediate.tex" -t latex
+pandoc -f jats "/mnt/$input" -s -o "/mnt/$output_name-intermediate.tex" -t latex --filter ./abstract.sh
 
-# xml -> pdf using custom intermediate template
-# errors in some cases
+# xml -> latex -> pdf, using custom intermediate template
+# often succeeds when direct xml->pdf doesnt
 pandoc \
-    -f jats "/mnt/$input" \
+    -f latex "/mnt/$output_name-intermediate.tex" \
     -o "/mnt/$output_name.pdf" \
     --template=/root/latex-template.tex \
-    --pdf-engine=xelatex || {
-
-        # TODO: scrap this in favour of using the standalone intermediate directly
-        echo "direct jats->pdf failed, attempting jats->latex->pdf"
-        # xml -> latex -> pdf
-        # succeeds when direct xml -> pdf doesnt
-        # this is *more* lossy
-        pandoc -f jats "/mnt/$input" -o "/mnt/$output_name.latex"
-        pandoc -f latex "/mnt/$output_name.latex" -o "/mnt/$output_name.pdf" --pdf-engine=xelatex
-}
+    --pdf-engine=xelatex
