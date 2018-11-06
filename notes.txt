@@ -110,17 +110,26 @@ notes:
     - custom output templates can be provided with `--template`
     - if our usage of JATS is *more* descriptive than the Pandoc type, the transformation will be lossy
     - we might be able to see what is lost by doing XML->PANDOC->XML and comparing in vs out
-    - is the JATS reader lossy? will it read everything? https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Readers/JATS.hs
+    - is the JATS reader lossy? [yes]. will it read everything? [no] https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Readers/JATS.hs
+        - 'abstract' is not being read, for example
+        - to modify you'll need to learn haskell
+        - it *is* wonderfully compact code
 evaluation:
     - there seems to be little in the way of translating jats XML->latex, I thought there would be more
-    - pdf output out of the box is impressive in terms of completeness
+    - pdf output out of the box is impressive in terms of coverage
         - bookmarks, footnotes present
         - no images yet but I was only targeting the xml
         - tables are absent
-        - margins are crazy
-    -
+        - abstract is absent
+    - the conversion from XML->latex is lossy
+    - to capture the missing bits, custom filters would have to be written for the Pandoc AST, or the haskell reader modified
+    - filters: https://pandoc.org/filters.html
+    - we already have an elife-XML->JSON scraper (elife-tools+bot-lax)
+    - the latex template used by Pandoc could very easily be translated to mustache/jinja/whatever and combined with the article-json
 decision:
     - promising
+    - if we are really keen on making this usable by non-elife people, we would go with pandoc and learn haskell or write loads of filter code
+
 ---
 type:elife-xml-to-pdf-candidate
 name: NCBI NLM Preview XSLT stylesheets
