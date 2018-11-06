@@ -97,9 +97,10 @@ for zipfile in ./articles/*.tar.gz; do
             echo > "../log/$log" # empty log
             timer_start
             ./run.sh "./mnt/$xml" $pdf &> "../log/$log" || {
+                rc=$?
                 timer_stop
                 update_metrics "timing" $msid $tname $timer_show "false"
-                printf "failed '$?'"
+                printf "failed '$rc'"
                 if [ -f "./mnt/$pdf" ]; then
                     printf " pdf generated"
                     mv "./mnt/$pdf" "../pdf/"
