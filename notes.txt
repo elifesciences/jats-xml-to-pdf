@@ -101,16 +101,24 @@ description: Pandoc is a Haskell library for converting from one markup format t
 references:
     - http://pandoc.org/MANUAL.html#input-formats
 notes:
-    - pandoc appears to natively support JATS as an input
+    - pandoc support JATS XML as an input (reader) and output (writer)
     - support is still *alpha* quality
-    - Ubuntu 18.10 has a recent enough version to use (see Dockerfile)
+        - ref: https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Readers/JATS.hs#L27
+    - Ubuntu 18.10 has a recent enough version to use
+    - works but converting to an intermediate 'Pandoc' type
+    - the output template to be used can be seen with `--print-default-template=latex`
+    - custom output templates can be provided with `--template`
+    - if our usage of JATS is *more* descriptive than the Pandoc type, the transformation will be lossy
+    - we might be able to see what is lost by doing XML->PANDOC->XML and comparing in vs out
+    - is the JATS reader lossy? will it read everything? https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Readers/JATS.hs
 evaluation:
-    - installation and configuration was a hassle. I did it within a docker container
-    - pdf output is impressive in terms of completeness
+    - there seems to be little in the way of translating jats XML->latex, I thought there would be more
+    - pdf output out of the box is impressive in terms of completeness
         - bookmarks, footnotes present
         - no images yet but I was only targeting the xml
         - tables are absent
         - margins are crazy
+    -
 decision:
     - promising
 ---
@@ -294,6 +302,7 @@ A developer looks at the thousands of articles published in XML and their hand-c
 * convenience of styling
 * changes in underlying technologies that affect rendered results
 * speed
+* indirection. how far removed from the transformations are we? and how precisely can we affect them?
 
 ## method
 
@@ -302,6 +311,7 @@ A developer looks at the thousands of articles published in XML and their hand-c
         - is code redeemable?
             - if not, discard
 2. 
+
 
 EOF
 
