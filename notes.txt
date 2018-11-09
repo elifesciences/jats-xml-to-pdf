@@ -266,7 +266,7 @@ For example:
 The artifacts of a transformation live in the `./mnt` directory. This directory is shared with the Docker container and
 is available within the container as `/mnt` (note the missing leading `.`).
 
-
+EOF
 ---
 type:document
 content-format: markdown
@@ -379,7 +379,7 @@ My next biggest concern is completeness. We absolutely should not have existenti
 
 LaTeX felt wonderfully precise, stable and sophisticated. Pandoc as well, but perhaps too constrained in it's internal model for us.
 
-The state of a HTML+CSS+JS, Paged Media and headless PDF printing stack felt like a hodge-podge of good intentions, much enthusiasm, sluggish W3C proposals, literal 'polyfill' javascript and hamfisting a traditionally non-print medium into a print one. Development and debugging on this stack will be frustrating. This stack will feel like the easiest route to most of us with web backgrounds and there *is* a lot of enthusiasm out there for a 'web native' approach, but overall it's terribly imprecise, slow and immature.
+The state of a HTML+CSS+JS, Paged Media and headless PDF printing stack felt like a hodge-podge of good intentions, much enthusiasm, sluggish W3C proposals, literal 'polyfill' javascript and hamfisting a traditionally non-print medium into a print one. Development and debugging on this stack will be frustrating. This stack will feel like the easiest route to most of us with web backgrounds and there *is* a lot of enthusiasm out there for a 'web native' approach, but overall it's terribly imprecise, slow and immature. The [print-css.rocks website](https://github.com/zopyx/print-css-rocks) has a number of 'lessons' that demonstrate various techniques of HTML->PDF, unfortunately most of them don't appear to very flattering when rendered with a headless browser. You can find my rendered outputs in the `./paged-media-output/` and the `./build-print-css-rocks-examples.sh` script to render your own.
 
 The XSLT stack feels like the 'proper' approach, but the XSL idiom of transforming XML into other XML including XSL-FO is often alien to developers. It requires more than just learning another programming language, it requires learning a different programming paradigm altogether whose tools are unpopular, scorned and worst of all: old. The precision and speed of this stack would be second to none however, but so would the learning curve and expertise required to maintain it all.
 
