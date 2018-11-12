@@ -25,7 +25,7 @@ A review of the current state of automated JATS XML to PDF conversion tools.
 
 ## results
 
-See [results](results.md) ([pdf](results.pdf))
+See [results](report.md) ([pdf](report.pdf))
 
 ## installation
 
@@ -76,4 +76,5 @@ If the directory syntax is used, then the contents of the directory are used and
 The artifacts of a transformation live in the `./mnt` directory. This directory is shared with the Docker container and 
 is available within the container as `/mnt` (note the missing leading `.`). This directory is also purged before each 
 run, so any adhoc output will be lost.
+
 
