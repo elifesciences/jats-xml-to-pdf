@@ -79,7 +79,7 @@ run, so any adhoc output will be lost.
 
 ## printcss.rocks examples
 
-The [printcss.rocks](https://printcss.rocks) website is an advocacy site for HTML+CSS Paged Media and it's github page 
+The [print-css.rocks](https://print-css.rocks) website is an advocacy site for HTML+CSS Paged Media and it's github page 
 has a number of 'lessons' demonstrating Paged Media techniques.
 
 These examples can be built using the script `./build-print-css-rocks-example.sh`.
