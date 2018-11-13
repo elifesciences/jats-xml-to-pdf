@@ -44,7 +44,7 @@ The initial environment can be built with:
 
     ./run.sh
 
-This will build the Docker images and create a file `built.flag` that prevents the containers from being built by `./run.sh` again.
+This will build the Docker images and create a file `built.flag` that prevents the containers from being built again by `./run.sh`.
 
 Use `./run.sh` again to start the generation/testing process.
 
@@ -71,10 +71,18 @@ or
 
     ./run.sh /path/to/article article.pdf
     
-If the directory syntax is used, then the contents of the directory are used and the expected file looks like `elife-<article-id>-v1.xml`
+If the directory syntax is used, then the expected XML filename must look like `elife-<article-id>-v1.xml`.
 
 The artifacts of a transformation live in the `./mnt` directory. This directory is shared with the Docker container and 
 is available within the container as `/mnt` (note the missing leading `.`). This directory is also purged before each 
 run, so any adhoc output will be lost.
 
+## printcss.rocks examples
+
+The [printcss.rocks](https://printcss.rocks) website is an advocacy site for HTML+CSS Paged Media and it's github page 
+has a number of 'lessons' demonstrating Paged Media techniques.
+
+These examples can be built using the script `./build-print-css-rocks-example.sh`.
+
+The [current results](./paged-media-pdf) using `wkhtmltopdf` are probably mostly broken.
 
